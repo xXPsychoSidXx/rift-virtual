@@ -10,7 +10,7 @@
 * @return filteredValue
 *	
 */
-pair<Vector3f, float> ComFilter(pair<EulerAngles, Vector3f> readings);
+std::pair<Vector3f, float> ComFilter(std::pair<EulerAngles, Vector3f> readings);
 
 /*
 * A Kalman filter for the corrected accelerometer readings

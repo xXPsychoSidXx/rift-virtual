@@ -24,6 +24,12 @@
     <ClCompile Include="RVC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EventInterfacing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventInterfacing1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RVC.h">

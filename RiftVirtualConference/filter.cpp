@@ -1,5 +1,4 @@
 #include "filter.h"
-using namespace std;
 
 /*
 * A complementary filter for the readings from the accelerometer and gyroscope.
@@ -14,7 +13,7 @@ using namespace std;
 *	Acceleration is needed in order to maintain angle with corrected accelerometer
 *	readings.
 */
-pair<Vector3f, float> ComFilter(pair<EulerAngles, Vector3f> readings)
+std::pair<Vector3f, float> ComFilter(std::pair<EulerAngles, Vector3f> readings)
 {
 	//Constants
 	double low = 9.8;
@@ -42,5 +41,5 @@ pair<Vector3f, float> ComFilter(pair<EulerAngles, Vector3f> readings)
 Vector3f KalmanFilter(Vector3f acc)
 {
 	// This just added to make code compile
-	return;
+	return acc;
 }

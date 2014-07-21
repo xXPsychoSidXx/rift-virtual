@@ -16,7 +16,7 @@ public:
 	* @param rift
 	*	An instance of the Rift interfacing class
 	*/
-	virtual bool pedometer(Rift rift)
+	bool pedometer(Rift rift)
 	{
 		// TODO write pedometer algorithm.
 		/*
@@ -33,7 +33,7 @@ public:
 	*		if (walking) return true
 	*		else return false
 	*/
-	virtual bool pedometer()
+	bool pedometer()
 	{
 		// TODO write pedometer algorithm. Implementation where rift connection is a member of this class--filtering to
 		// be handled on the rift side of things.

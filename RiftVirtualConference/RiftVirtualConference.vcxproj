@@ -80,6 +80,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EventInterfacing.cpp" />
+    <ClCompile Include="EventInterfacing1.cpp" />
     <ClCompile Include="filter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RVC.cpp" />
