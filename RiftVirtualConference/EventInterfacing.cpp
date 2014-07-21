@@ -1,14 +1,14 @@
-#include "EventInterfacing.h"
-#include "RVC.h"
+#include "EventInterface.h"
 
-class EventInterfacing : EventInterface
+class EventInterfacing : IEvent
 {
-public:
+private:
 	float walkAcc;
 	float walkDecc;
-	Rift rift;
+	IRift * rift;
 
-	EventInterfacing::EventInterfacing(Rift connection, float accThreshold, float deccThreshold)
+public:
+	EventInterfacing::EventInterfacing(IRift * connection, float accThreshold, float deccThreshold)
 	{
 		this->rift = connection;
 		this->walkAcc = accThreshold;
@@ -17,7 +17,7 @@ public:
 
 	EventInterfacing::~EventInterfacing()
 	{
-		this->rift.clear();
+		this->rift->clear();
 	}
 
 	/*
@@ -46,6 +46,7 @@ public:
 	float findAccelerationThreshold(std::vector<float> & accData)
 	{
 		// TODO write algorithm to quickly find a threshold for beginning walking from a vector.
+		return 0;
 	};
 
 	/*
@@ -57,6 +58,7 @@ public:
 	float findDeccelerationThreshold(std::vector<float> accData)
 	{
 		// TODO write algorithm to quickly find threshold for decceleration.
+		return 0;
 	};
 
 	/*
@@ -72,7 +74,7 @@ public:
 		ip.ki.time = 0;
 		ip.ki.dwExtraInfo = 0;
 
-		float zAccel = rift.CorrectedAcceleration().z;
+		float zAccel = rift->CorrectedAcceleration().z;
 		// If we detect acceleration, assume walking until we detect deceleration
 		if (zAccel < this->walkAcc)
 		{
@@ -82,13 +84,29 @@ public:
 				ip.ki.wVk = 0x57;
 				ip.ki.dwFlags = 0;
 				SendInput(1, &ip, sizeof(INPUT));
-				zAccel = rift.CorrectedAcceleration().z;
+				zAccel = rift->CorrectedAcceleration().z;
 			}
 		}
 
 		//Release key
 		ip.ki.dwFlags = KEYEVENTF_KEYUP;
 		SendInput(1, &ip, sizeof(INPUT));
+	};
+
+	bool pedometer()
+	{
+		// TODO add pedometer algorithm
+
+		//Added just to make code compile
+		return false;
+	};
+
+	bool pedometer(IRift * rift)
+	{
+		// TODO add pedometer algorithm
+
+		//Added just to make code compile
+		return false;
 	};
 	
 };

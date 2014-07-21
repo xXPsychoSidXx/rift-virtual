@@ -1,9 +1,15 @@
-#include "RVC.h"
+#include "RVCInterface.h"
 #include "EulerAngles.h"
 #include "filter.h"
 
-class RVC : Rift
+
+// This class only interacts with Rift so using OVR isn't dangerous. Do not 
+// blindly add namespaces to other files.
+using namespace OVR;
+
+class RVC : public IRift
 {
+public:
 	/*
 	* Initializes the connection to the Oculus Rift. More about this and clear is shown in the Minimal Oculus 
 	* tutorial for SDK 0.2.5c. This is deprecated as of DK2, but at the time of implementation we
@@ -13,7 +19,7 @@ class RVC : Rift
 	* deprecated by the time of release (as the API will change on release). All conventions and algorithms will likely hold,
 	* updates should just be rolling in new functions/updating deprecated ones.
 	*/
-	void init()
+	void RVC::init()
 	{
 		System::Init();
 		pFusionResult = new SensorFusion();
@@ -40,7 +46,7 @@ class RVC : Rift
 	/*
 	* Clears and destroys connection to the Oculus Rift. See contract for init().
 	*/
-	void clear()
+	void RVC::clear()
 	{
 		pSensor.Clear();
 		pHMD.Clear();
@@ -80,7 +86,7 @@ class RVC : Rift
 	*	This quaternion will almost always not be the quarternion in real time and such the
 	*	Euler angles will not be the angles in real time either.
 	*/
-	EulerAngles RawEulerAngles()
+	EulerAngles RVC::RawEulerAngles()
 	{
 		EulerAngles ang;
 		float yaw, pitch, roll;
@@ -105,7 +111,7 @@ class RVC : Rift
 	* @return 
 	*	The raw acceleration data from the Oculus Rift. 
 	*/
-	Vector3f RawAcceleration()
+	Vector3f RVC::RawAcceleration()
 	{
 		return pFusionResult->GetAcceleration();
 	};
@@ -120,7 +126,7 @@ class RVC : Rift
 	* @return
 	*	Quaternion representing a rotation matrix.
 	*/
-	Quatf RawOrientation()
+	Quatf RVC::RawOrientation()
 	{
 		return pFusionResult->GetOrientation();
 	};
@@ -133,9 +139,9 @@ class RVC : Rift
 	* @return acc
 	*	The corrected acceleration vector.
 	*/
-	Vector3f CorrectedAcceleration()
+	Vector3f RVC::CorrectedAcceleration()
 	{
-		float gravity = 9.81;
+		float gravity = 9.81f;
 		EulerAngles angles = this->RawEulerAngles();
 		Vector3f acc = this->RawAcceleration();
 		std::pair<EulerAngles, Vector3f> preFusion (angles, acc);

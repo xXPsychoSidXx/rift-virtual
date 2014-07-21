@@ -1,5 +1,4 @@
 #include "filter.h"
-
 /*
 * A complementary filter for the readings from the accelerometer and gyroscope.
 * Uses high and low pass filtering from the accelerometer and gyroscope in order to
@@ -13,7 +12,7 @@
 *	Acceleration is needed in order to maintain angle with corrected accelerometer
 *	readings.
 */
-std::pair<Vector3f, float> ComFilter(std::pair<EulerAngles, Vector3f> readings)
+std::pair<EulerAngles, OVR::Vector3f> ComFilter(std::pair<EulerAngles, OVR::Vector3f> readings)
 {
 	//Constants
 	double low = 9.8;
@@ -28,7 +27,7 @@ std::pair<Vector3f, float> ComFilter(std::pair<EulerAngles, Vector3f> readings)
 	//if (forceMagnitude > low && forceMagnitude < high)
 	//{
 	float pitchAcc = atan2(readings.second.y, readings.second.z);
-		float pitch = pitch * gyroWeight + pitchAcc * accWeight;
+	float pitch = pitch * gyroWeight + pitchAcc * accWeight;
 	//}
 	readings.first.pitch = pitch;
 
@@ -38,8 +37,8 @@ std::pair<Vector3f, float> ComFilter(std::pair<EulerAngles, Vector3f> readings)
 /*
 * TODO Write a Kalman filtering system for the acceleration data
 */
-Vector3f KalmanFilter(Vector3f acc)
+OVR::Vector3f KalmanFilter(OVR::Vector3f acc)
 {
-	// This just added to make code compile
+	// This just added to make code build
 	return acc;
 }

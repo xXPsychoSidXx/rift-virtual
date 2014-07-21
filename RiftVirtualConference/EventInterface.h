@@ -1,11 +1,9 @@
 #ifndef EVENTINTERFACING_H
 #define EVENTINTERFACING_H
 #include <vector>
-#include "RVC.h"
+#include "RVCInterface.h"
 
-// The naming convention here is vague. EventInterface refers to an INTERFACE but implementations of the this INTERFACE
-// are meant to do INTERFACING for the Rift to the virtual world. 
-class EventInterface
+class IEvent
 {
 public:
 	/*
@@ -15,7 +13,7 @@ public:
 	*	Changes walkAcc to new acceleration and walkDecc to new threshold
 	*		walkAcc = acc && walkDecc = decc
 	*/
-	virtual void setThreshold(float acc, float decc);
+	virtual void setThreshold(float acc, float decc) = 0;
 
 	/*
 	* Finds and returns threshold values for acceleration to walking.
@@ -27,7 +25,7 @@ public:
 	* @return 
 	*	A threshold value that signifies that a person has begun walking
 	*/
-	virtual float findAccelerationThreshold(std::vector<float> & accData);
+	virtual float findAccelerationThreshold(std::vector<float> & accData) = 0;
 
 	/*
 	* Finds and returns threshold values for acceleration to walking.
@@ -39,7 +37,7 @@ public:
 	* @return 
 	*	A threshold value that signifies that a person has begun walking
 	*/
-	virtual float findAccelerationThreshold(float accData[]); 
+	virtual float findAccelerationThreshold(float accData[]) = 0; 
 
 	/*
 	* Finds and returns threshold values for decceleration to stop.
@@ -47,7 +45,7 @@ public:
 	* @return
 	*	A threshold value that signifies that a person has begun to stop walking
 	*/
-	virtual float findAccelerationThreshold(std::vector<float> accData);
+	virtual float findAccelerationThreshold(std::vector<float> accData) = 0;
 
 	/*
 	* Finds and returns threshold values for decceleration to stop.
@@ -55,7 +53,7 @@ public:
 	* @return
 	*	A threshold value that signifies that a person has begun to stop walking
 	*/
-	virtual float FindDeccelerationThreshold(float accData[]);
+	virtual float FindDeccelerationThreshold(float accData[]) = 0;
 
 	/*
 	* Pedometer using accelerometer in the Oculus Rift. 
@@ -65,7 +63,7 @@ public:
 	*		if (walking) return true
 	*		else return false
 	*/
-	virtual bool pedometer(Rift rift);
+	virtual bool pedometer(IRift * rift) = 0;
 
 	/*
 	* Pedometer using accelerometer in the Oculus Rift. 
@@ -75,7 +73,7 @@ public:
 	*		if (walking) return true
 	*		else return false
 	*/
-	virtual bool pedometer();
+	virtual bool pedometer() = 0;
 
 	// This (move) is likely the function that will change the most if future interns are able to establish a direct connection to OpenSim
 	// or build a viewer. Much of the other algorithms should require NO change and future interns should be careful
@@ -87,12 +85,12 @@ public:
 	* @requires
 	*	There is a connection to OpenSim.
 	*/
-	virtual void move();
+	virtual void move() = 0;
 
 	/*
 	* Virtual destructor
 	*/
-	virtual ~EventInterface();
+	virtual ~IEvent();
 };
 
 #endif

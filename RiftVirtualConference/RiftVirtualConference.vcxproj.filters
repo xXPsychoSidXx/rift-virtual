@@ -32,16 +32,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RVC.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EulerAngles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EventInterfacing.h">
+    <ClInclude Include="RVCInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

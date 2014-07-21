@@ -1,6 +1,6 @@
 #ifndef FILTER_H
 #define FILTER_H
-#include "RVC.h"
+#include "RVCInterface.h"
 
 /*
 * A complementary filter for the readings from the accelerometer and gyroscope.
@@ -10,11 +10,11 @@
 * @return filteredValue
 *	
 */
-std::pair<Vector3f, float> ComFilter(std::pair<EulerAngles, Vector3f> readings);
+std::pair<EulerAngles, OVR::Vector3f> ComFilter(std::pair<EulerAngles, OVR::Vector3f> readings);
 
 /*
 * A Kalman filter for the corrected accelerometer readings
 */
-Vector3f KalmanFilter(Vector3f acc);
+OVR::Vector3f KalmanFilter(OVR::Vector3f acc);
 
 #endif
